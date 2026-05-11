@@ -19,44 +19,29 @@
         .quiz-card { background: var(--white); width: 100%; max-width: 900px; border-radius: 15px; box-shadow: 0 5px 25px rgba(0,0,0,0.08); border-top: 12px solid var(--main-color); padding: 35px; position: relative; }
         .header { text-align: center; border-bottom: 2px solid #f0f0f0; margin-bottom: 25px; padding-bottom: 15px; }
         .nav-bar { display: flex; justify-content: space-between; align-items: center; background: rgba(0,0,0,0.02); padding: 15px 25px; border-radius: 10px; margin-bottom: 25px; border: 1px solid #eee; }
-        
-        /* تسيق اسم المتحدي */
-        .challenger-box { 
-            color: var(--main-color);
-            font-weight: bold; 
-        }
-
+        .challenger-box { color: var(--main-color); font-weight: bold; }
         .q-type-badge { background: var(--main-color); color: white; padding: 8px 20px; border-radius: 8px; font-size: 1.1rem; font-weight: bold; }
         .q-text { font-size: 1.6rem; font-weight: bold; text-align: center; line-height: 1.8; color: #2c3e50; padding: 10px; border-radius: 12px; min-height: 50px; display: flex; align-items: center; justify-content: center; flex-direction: column; }
-        
-        .reading-passage { 
-            background-color: var(--passage-bg); border-right: 6px solid var(--main-color); 
-            padding: 20px; margin: 15px 0; border-radius: 8px; text-align: justify; 
-            font-size: 1.2rem; line-height: 1.9; color: #333; width: 100%; box-sizing: border-box; display: block;
-        }
-
+        .reading-passage { background-color: var(--passage-bg); border-right: 6px solid var(--main-color); padding: 20px; margin: 15px 0; border-radius: 8px; text-align: justify; font-size: 1.2rem; line-height: 1.9; color: #333; width: 100%; box-sizing: border-box; display: block; }
         .options-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 25px; }
         .opt { padding: 20px; border: 2px solid #ecf0f1; border-radius: 12px; cursor: pointer; text-align: center; font-size: 1.3rem; background: #fff; transition: 0.2s; color: #34495e; font-weight: 600; }
         .opt:hover { border-color: var(--main-color); background: #f9fbfb; }
         .correct { background: var(--correct) !important; color: white !important; border-color: var(--correct) !important; }
         .wrong { background: var(--wrong) !important; color: white !important; border-color: var(--wrong) !important; }
-        .btn { background: var(--main-color); color: white; padding: 15px 55px; border: none; border-radius: 8px; cursor: pointer; font-size: 1.1rem; font-weight: bold; display: inline-block; text-decoration: none; }
+        .btn { background: var(--main-color); color: white; padding: 15px 55px; border: none; border-radius: 8px; cursor: pointer; font-size: 1.1rem; font-weight: bold; display: inline-block; text-decoration: none; transition: 0.3s; }
+        .btn:hover { opacity: 0.9; transform: translateY(-2px); }
         .hidden { display: none !important; }
         input { width: 80%; padding: 15px; border-radius: 8px; border: 1px solid #ddd; margin-bottom: 15px; text-align: center; font-size: 1.1rem; }
-           /* تحسينات التجاوب مع الجوال */
+
         @media (max-width: 600px) {
             body { padding: 10px; }
             .quiz-card { padding: 20px 15px; border-top-width: 8px; }
-            .header h3 { font-size: 1.2rem; }
-            .header h4 { font-size: 1rem; }
             .nav-bar { padding: 10px; flex-direction: column; gap: 10px; }
-            .q-text { font-size: 1.3rem; line-height: 1.5; }
+            .q-text { font-size: 1.3rem; }
             .options-grid { grid-template-columns: 1fr; gap: 12px; }
             .opt { padding: 15px; font-size: 1.1rem; }
-            .reading-passage { font-size: 1.1rem; padding: 15px; line-height: 1.7; }
             .btn { width: 100%; padding: 12px; box-sizing: border-box; }
             input { width: 100%; box-sizing: border-box; }
-            #score-text { font-size: 3.5rem; }
         }
     </style>
 </head>
@@ -68,11 +53,17 @@
         <h4>أ / عبدالعزيز الفيفي ✨</h4>
     </div>
 
-    <div id="lock-screen" class="hidden" style="text-align: center; padding: 40px;">
-        <h1 style="font-size: 4rem; margin: 0;">🚫</h1>
-        <h2 style="color: var(--wrong);">تنبيه النظام</h2>
-        <div id="lock-message" style="font-size: 1.3rem; line-height: 1.6; color: #555;"></div>
-        <button class="btn" onclick="location.reload()" style="margin-top: 20px;">العودة</button>
+    <div id="lock-screen" class="hidden" style="text-align: center; padding: 20px;">
+        <div style="margin-bottom: 20px;">
+            <h1 style="font-size: 5rem; margin: 0; color: #e74c3c;">🚫</h1>
+            <h2 style="color: #e74c3c; margin-top: 10px;">تنبيه النظام</h2>
+        </div>
+        <div id="lock-message" style="font-size: 1.1rem; line-height: 1.6; color: #555; margin-bottom: 25px; padding: 0 10px;"></div>
+        <div id="lock-actions" style="display: flex; flex-direction: column; align-items: center; gap: 12px;">
+            <p style="font-size: 0.9rem; color: #888; margin: 0;">يمكنك تجربة هذا الرابط:</p>
+            <a id="lock-link" href="https://aztlaztl1512-bit.github.io/MAHME-/" class="btn" style="background-color: #27ae60; width: 220px; padding: 12px; font-size: 1rem;">اضغط هنا للانتقال ⬅</a>
+            <button class="btn" onclick="location.reload()" style="background-color: #7c2d12; width: 160px; padding: 10px; font-size: 1rem;">العودة</button>
+        </div>
     </div>
 
     <div id="start-page" style="text-align: center;">
@@ -102,11 +93,22 @@
     <div id="result-page" class="hidden" style="text-align: center;">
         <h2 id="final-greeting"></h2>
         <div style="font-size: 5rem; font-weight: bold; margin: 25px 0; color: var(--main-color);" id="score-text"></div>
-        <button class="btn" onclick="location.reload()">خروج</button>
+        <button class="btn" onclick="location.reload()" style="padding: 15px 80px;">خروج</button>
     </div>
 </div>
 
 <script>
+    const firebaseConfig = { 
+        apiKey: "AIzaSyBkCO7FDQXd89YDf843J4_AtvEFvzzt-R0", 
+        authDomain: "aztlg-494c3.firebaseapp.com", 
+        projectId: "aztlg-494c3", 
+        storageBucket: "aztlg-494c3.firebasestorage.app", 
+        messagingSenderId: "597051893949", 
+        appId: "1:597051893949:web:de5554ac900317a92b2fd4" 
+    };
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+
     const themes = [
         {main: "#800000", bg: "#fdf1f1", pbg: "rgba(128, 0, 0, 0.05)"},
         {main: "#2c3e50", bg: "#f4f7f6", pbg: "rgba(44, 62, 80, 0.05)"},
@@ -117,86 +119,81 @@
         {main: "#0369a1", bg: "#f0f9ff", pbg: "rgba(3, 105, 161, 0.05)"},
         {main: "#be185d", bg: "#fff1f2", pbg: "rgba(190, 24, 93, 0.05)"},
         {main: "#15803d", bg: "#f0fdf4", pbg: "rgba(21, 128, 61, 0.05)"},
-        {main: "#4338ca", bg: "#eef2ff", pbg: "rgba(67, 56, 202, 0.05)"},
-        {main: "#334155", bg: "#f8fafc", pbg: "rgba(51, 65, 85, 0.05)"},
-        {main: "#7c2d12", bg: "#fff7ed", pbg: "rgba(124, 45, 18, 0.05)"},
-        {main: "#1e1b4b", bg: "#fdfdfd", pbg: "rgba(30, 27, 75, 0.03)"}
+        {main: "#7c2d12", bg: "#fff7ed", pbg: "rgba(124, 45, 18, 0.05)"}
     ];
-
     const theme = themes[Math.floor(Math.random() * themes.length)];
     document.documentElement.style.setProperty('--main-color', theme.main);
     document.documentElement.style.setProperty('--bg-color', theme.bg);
     document.documentElement.style.setProperty('--passage-bg', theme.pbg);
 
     const rawQuizData = [
-      { t: "تناظر لفظي", q: "وَرَق : حُلِيّ", opts: ["ماء : ارتواء", "قمح : خبز", "زهرة : رحيق", "عسل : نحل"], ans: "قمح : خبز" },
-      { t: "تناظر لفظي", q: "حاجة : تدريب", opts: ["طبخ : جوع", "رغبة : إرادة", "استزراع : تصحر", "قحط : استسقاء"], ans: "قحط : استسقاء" },
-      { t: "تناظر لفظي", q: "طفولة : شباب", opts: ["جمعة : الإثنين", "غداة : ضحى", "غدو : رواح", "بغل : حصان"], ans: "غداة : ضحى" },
-      { t: "تناظر لفظي", q: "طلاء : دهان", opts: ["خشب : نجار", "حدادة : حداد", "دقيق : خباز", "طيارة : طيار"], ans: "حدادة : حداد" },
-      { t: "تناظر لفظي", q: "شعر : قص", opts: ["ثمار : قطف", "قمح : حصد", "حقل : حرث", "شجرة : تهذيب"], ans: "شجرة : تهذيب" },
-      { t: "تناظر لفظي", q: "شفتين : فم", opts: ["جفن : عين", "شعر : رأس", "عين : أذن", "رأس : قدم"], ans: "جفن : عين" },
-      { t: "تناظر لفظي", q: "نوم : رقاد", opts: ["قلب : فؤاد", "دافئ : ساخن", "رعد : شديد", "علم : معلومات"], ans: "قلب : فؤاد" },
-      { t: "تناظر لفظي", q: "جفاف : ماء", opts: ["عقل : مخ", "سمع : أذن", "عمى : عين", "رمل : زجاج"], ans: "عمى : عين" },
-      { t: "إكمال جمل", q: "إذا أدرت عدم ........ فلا تتكلم ولا ........ حتى تصبح لا شيء.", opts: ["النقد – تعمل", "الكذب – تكذب", "الجدال – تسأل", "السخرية – تغضب"], ans: "النقد – تعمل" },
-      { t: "إكمال جمل", q: "إذا أردت فعل شيء فـ ........ لأن ........ يفسد الرأي.", opts: ["أحجم – التردد", "اعزم – التردد", "تُخبر – التأخر", "امتنع – الوقت"], ans: "اعزم – التردد" },
-      { t: "إكمال جمل", q: "إن العامة يرون أن العالم ........ يكونون عند حضرته كالطفل في ........ أمه.", opts: ["المثواني – عطف", "الحافظ – بطن", "الكيس – بيت", "العامل – حجر"], ans: "العامل – حجر" },
-      { t: "إكمال جمل", q: "إن القائد الجيد هو الذي يحفز ........ ليجعلهم قادة ........", opts: ["أتباعه – شجعان", "أولاده – شرفاء", "جنوده – أقوياء", "أقرانه – جيدون"], ans: "أتباعه – شجعان" },
-      { t: "إكمال جمل", q: "على المعلم أن يكون ........ لكي يستطيع أن ........ بين التربية والتعليم.", opts: ["متفهماً – يوافق", "رجعياً – الجميع", "ذكياً – التفريق", "يقظاً – يوازن"], ans: "يقظاً – يوازن" },
-      { t: "إكمال جمل", q: "لا شيء ........ والكبر ........ بين المرء وبين الأخذ بالعلم (وبين إنجازاته).", opts: ["كالمتعالياً – مسهلاً", "كالزهو – حائلاً", "كالتواضع – حائلاً", "حائلاً – متسرعاً"], ans: "كالزهو – حائلاً" },
-      { t: "خطأ سياقي", q: "لا تجعل أحداً يتحكم في وقتك إلا نفسك، وكن ملكاً لغيرك لا ملكاً للآخرين.", opts: ["تجعل", "نفسك", "لغيرك", "للآخرين"], ans: "لغيرك" },
-      { t: "خطأ سياقي", q: "من أهم خصال المدير الناجح الشجاعة والجرأة على التفكير والجرأة على العمل والجرأة على توقع النجاح.", opts: ["خصال", "التفكير", "العمل", "النجاح"], ans: "النجاح" },
-      { t: "خطأ سياقي", q: "تحل بالحياء، فالأشياء الجيدة تأتي لأولئك الذين ينتظرون.", opts: ["بالحياء", "فالأشياء", "الجيدة", "تأتي"], ans: "بالحياء" },
-      { t: "خطأ سياقي", q: "تدني الشبع أفسد للبدن من إكثار الأغذية التي تعود عليه بالتخمة.", opts: ["تدني", "أفسد", "الأغذية", "بالتخمة"], ans: "أفسد" },
-      { t: "خطأ سياقي", q: "القلم بيد الكاتب رسالة، فيجب أن يحفظها ويؤديها بإخلاص.", opts: ["القلم", "الكاتب", "رسالة", "يحفظها"], ans: "يحفظها" },
-      { t: "خطأ سياقي", q: "البطن الممتلئ بصغائر الأمور، لا يتسع لكبارها.", opts: ["البطن", "صغائر", "يتسع", "لكبارها"], ans: "البطن" },
-      { t: "خطأ سياقي", q: "الصاحب الوفي من يغويك بقدر ما تحاول أنت جاهداً محاربته.", opts: ["الوفي", "تحاول", "جاهداً", "محاربته"], ans: "الوفي" },
-      { t: "المفردة الشاذة", q: "اختر المفردة الشاذة:", opts: ["سكون", "دعة", "راحة", "عمق"], ans: "دعة" },
-      { t: "المفردة الشاذة", q: "اختر المفردة الشاذة:", opts: ["جري", "هرولة", "تفكير", "جلوس"], ans: "تفكير" },
-      { t: "المفردة الشاذة", q: "اختر المفردة الشاذة:", opts: ["رجوع", "خطأ", "ندم", "اعتذار"], ans: "ندم" },
-      { t: "استيعاب المقروء", q: "<span class='reading-passage'>إن الإنسان يقضي حياته الدنيا في حل وترحال وتعب وراحة وحزن وفرح ورغبة ورهبة والمطلوب من الإنسان على أي حال الصبر.</span> العلاقة بين (رغبة) و(رهبة):", opts: ["تضاد", "ترادف", "تشابه", "توافق"], ans: "تضاد" },
-      { t: "استيعاب المقروء", q: "<span class='reading-passage'>إن الإنسان يقضي حياته الدنيا في حل وترحال وتعب وراحة وحزن وفرح ورغبة ورهبة والمطلوب من الإنسان على أي حال الصبر.</span> الكلمة التي يمكن حذفها من النص دون أن يتأثر المعنى:", opts: ["الدنيا", "الصبر", "الإنسان", "حال"], ans: "الدنيا" },
-      { t: "استيعاب المقروء", q: "<span class='reading-passage'>إن الإنسان يقضي حياته الدنيا في حل وترحال وتعب وراحة وحزن وفرح ورغبة ورهبة والمطلوب من الإنسان على أي حال الصبر.</span> ما هو العنوان المناسب للنص؟", opts: ["الحكمة (اليأس)", "تحمل المتاعب", "التعايش", "التفاؤل"], ans: "تحمل المتاعب" },
-      { t: "استيعاب المقروء", q: "<span class='reading-passage'>إن الإنسان يقضي حياته الدنيا في حل وترحال وتعب وراحة وحزن وفرح ورغبة ورهبة والمطلوب من الإنسان على أي حال الصبر.</span> الكلمة التي لا تنتمي لسياق النص:", opts: ["فرح وحزن", "حل وترحال", "تعب وراحة", "رغبة ورهبة"], ans: "حل وترحال" },
-      { t: "استيعاب المقروء", q: "<span class='reading-passage'>إن الإنسان يقضي حياته الدنيا في حل وترحال وتعب وراحة وحزن وفرح ورغبة ورهبة والمطلوب من الإنسان على أي حال الصبر.</span> علاقة جملة 'والمطلوب من الإنسان على أي حال الصبر' بما قبلها:", opts: ["سبب", "نتيجة", "تعليل", "تفصيل"], ans: "نتيجة" },
-      { t: "استيعاب المقروء", q: "<span class='reading-passage'>إن الإنسان يقضي حياته الدنيا في حل وترحال وتعب وراحة وحزن وفرح ورغبة ورهبة والمطلوب من الإنسان على أي حال الصبر.</span> كم تضاد في النص؟", opts: ["1", "2", "3", "4"], ans: "4" }
-    ];
+    // --- 1. التناظر اللفظي (8 أسئلة) ---
+    { t: "تناظر لفظي", q: "بكة : مكة", opts: ["المدينة : طيبة", "القدس : فلسطين", "الرياض : السعودية", "مصر : القاهرة"], ans: "المدينة : طيبة" },
+    { t: "تناظر لفظي", q: "الملك عبد العزيز : توحيد", opts: ["المعلم : تربية", "المهندس : بناء", "الطبيب : جراحة", "الكاتب : قلم"], ans: "المعلم : تربية" },
+    { t: "تناظر لفظي", q: "رؤية 2030 : ازدهار", opts: ["اجتهاد : نجاح", "ليل : نهار", "سفر : طائرة", "مرض : دواء"], ans: "اجتهاد : نجاح" },
+    { t: "تناظر لفظي", q: "سيف : حديد", opts: ["خاتم : ذهب", "باب : منزل", "شجرة : غابة", "كتاب : ورقة"], ans: "خاتم : ذهب" },
+    { t: "تناظر لفظي", q: "بئر : ماء", opts: ["محفظة : نقود", "شمس : ضياء", "نهر : جريان", "مزرعة : فلاح"], ans: "محفظة : نقود" },
+    { t: "تناظر لفظي", q: "وضوء : صلاة", opts: ["شهادة : دخول إسلام", "نوم : حلم", "إفطار : صوم", "سفر : تعب"], ans: "شهادة : دخول إسلام" },
+    { t: "تناظر لفظي", q: "عمر بن الخطاب : الفاروق", opts: ["أبو بكر : الصديق", "علي : الكرار", "عثمان : ذو النورين", "خالد : سيف الله"], ans: "أبو بكر : الصديق" },
+    { t: "تناظر لفظي", q: "القلب : المضخة", opts: ["العين : العدسة", "الأذن : الصوت", "اليد : الحركة", "الرجل : المشي"], ans: "العين : العدسة" },
 
-    const currentModelId = " نموذج - 2 ";
-    let sName, sEmail, currentIdx = 0, userScore = 0, timer, finalQuestions;
+    // --- 2. إكمال الجمل (7 أسئلة) ---
+    { t: "إكمال الجمل", q: "تعد المملكة العربية السعودية ...... للعالم الإسلامي بفضل وجود ...... الشريفين فيها.", opts: ["قلباً - المسجدين", "منارة - الحرمين", "مركزاً - القصرين", "واجهة - العلمين"], ans: "منارة - الحرمين" },
+    { t: "إكمال الجمل", q: "من استهان بـ ...... العلماء ضل، ومن استهان بـ ...... الحكام ذل.", opts: ["علم - هيبة", "نصح - مال", "كتب - قوة", "مجلس - عدل"], ans: "علم - هيبة" },
+    { t: "إكمال الجمل", q: "القرآن الكريم هو ...... الذي يهدي للتي هي ...... .", opts: ["النور - أقوم", "الكتاب - أفضل", "الدليل - أصح", "المصباح - أجمل"], ans: "النور - أقوم" },
+    { t: "إكمال الجمل", q: "العلم بلا ...... كالشجر بلا ...... .", opts: ["عمل - ثمر", "مال - ورق", "صبر - أغصان", "جهد - جذور"], ans: "عمل - ثمر" },
+    { t: "إكمال الجمل", q: "كان الصحابة رضي الله عنهم ...... في الليل ...... في النهار.", opts: ["رهباناً - فرساناً", "نياماً - تجاراً", "قائمين - صائمين", "خاشعين - عاملين"], ans: "رهباناً - فرساناً" },
+    { t: "إكمال الجمل", q: "الابتسامة لغة لا تحتاج إلى ...... وهي ...... طريق نحو القلوب.", opts: ["ترجمة - أقصر", "كلمات - أجمل", "تفسير - أصعب", "صوت - أبعد"], ans: "ترجمة - أقصر" },
+    { t: "إكمال الجمل", q: "لا يقاس الذكاء بما ...... الشخص، بل بكيفية ...... مع المواقف الصعبة.", opts: ["يعرفه - تعامله", "يملكه - هروبه", "يقوله - نقاشه", "يدرسه - تخطيه"], ans: "يعرفه - تعامله" },
 
-    const firebaseConfig = { apiKey: "AIzaSyBkCO7FDQXd89YDf843J4_AtvEFvzzt-R0", authDomain: "aztlg-494c3.firebaseapp.com", projectId: "aztlg-494c3", storageBucket: "aztlg-494c3.firebasestorage.app", messagingSenderId: "597051893949", appId: "1:597051893949:web:de5554ac900317a92b2fd4" };
-    firebase.initializeApp(firebaseConfig);
-    const db = firebase.firestore();
+    // --- 3. استيعاب المقروء (7 أسئلة متنوعة) ---
+    { t: "استيعاب المقروء", q: "<div class='reading-passage'>يعد الملك عبد العزيز بن عبد الرحمن آل سعود -رحمه الله- مؤسس المملكة العربية السعودية الحديثة. استطاع بفضل الله ثم بشجاعته وحكمته توحيد أرجاء البلاد تحت راية التوحيد، ونشر الأمن والأمان في ربوع الجزيرة العربية بعد فترات من الشتات والنزاعات.</div> الفكرة الرئيسية للنص هي:", opts: ["تاريخ الجزيرة القديم", "جهود الملك عبد العزيز في التوحيد", "تطور المدن السعودية", "الموقع الجغرافي للمملكة"], ans: "جهود الملك عبد العزيز في التوحيد" },
+    { t: "استيعاب المقروء", q: "<div class='reading-passage'>كان الصحابي الجليل عبد الله بن عباس يُلقب بـ 'حبر الأمة' و 'ترجمان القرآن'. تميز بعلمه الغزير رغم صغر سنه عند وفاة النبي صلى الله عليه وسلم، وذلك بفضل دعاء النبي له: 'اللهم فقهه في الدين وعلمه التأويل'.</div> نال ابن عباس مكانته العلمية بفضل:", opts: ["كبر سنه", "دعاء النبي والاجتهاد", "رحلاته التجارية", "كثرة ماله"], ans: "دعاء النبي والاجتهاد" },
+    { t: "استيعاب المقروء", q: "<div class='reading-passage'>تعتبر الطاقة المتجددة مثل الطاقة الشمسية وطاقة الرياح هي مستقبل البشرية النظيف. تهدف هذه التقنيات إلى الحد من انبعاثات الكربون وتقليل التلوث البيئي الناتج عن الوقود الأحفوري، مما يضمن كوكباً مستداماً للأجيال القادمة.</div> الفائدة البيئية للطاقة المتجددة هي:", opts: ["زيادة التلوث", "الحد من انبعاثات الكربون", "تكلفة إنتاجها العالية", "استنزاف الموارد الطبيعية"], ans: "الحد من انبعاثات الكربون" },
+    { t: "استيعاب المقروء", q: "<div class='reading-passage'>الألغاز المنطقية والرياضيات ليست مجرد أرقام، بل هي وسيلة لتدريب العقل على التفكير التسلسلي. فحل المسائل المعقدة يتطلب تفكيك المشكلة إلى أجزاء صغيرة والتعامل مع كل جزء بتركيز، وهو ما يسمى 'المنهج التحليلي'.</div> المنهج التحليلي في حل المسائل يعني:", opts: ["تجاهل المشكلة", "تفكيك المشكلة لأجزاء صغيرة", "الاعتماد على الحظ", "حفظ النتائج النهائية"], ans: "تفكيك المشكلة لأجزاء صغيرة" },
+    { t: "استيعاب المقروء", q: "<div class='reading-passage'>تميز الأدب العربي في العصر العباسي بالظهور القوي للشعراء والمفكرين الذين مزجوا بين الثقافة العربية وعلوم الحضارات الأخرى. وظهرت حركات الترجمة التي نشطت في 'بيت الحكمة' ببغداد، مما أدى لنهضة علمية شاملة.</div> سبب النهضة العلمية في العصر العباسي حسب النص:", opts: ["الحروب المستمرة", "حركات الترجمة والامتزاج الثقافي", "الابتعاد عن العلوم الأخرى", "إغلاق بيت الحكمة"], ans: "حركات الترجمة والامتزاج الثقافي" },
+    { t: "استيعاب المقروء", q: "<div class='reading-passage'>النبي يوسف عليه السلام ضرب أروع الأمثلة في الصبر والعفة والوفاء. فرغم تعرضه للظلم من إخوته ثم السجن، إلا أنه أصبح عزيز مصر بفضل تقواه وحسن تدبيره للموارد الاقتصادية خلال سنوات القحط.</div> تمكن يوسف عليه السلام من إنقاذ مصر من القحط بفضل:", opts: ["القوة العسكرية", "التقوى وحسن التدبير الاقتصادي", "مساعدة إخوته له", "مغادرة البلاد"], ans: "التقوى وحسن التدبير الاقتصادي" },
+    { t: "استيعاب المقروء", q: "<div class='reading-passage'>تعتبر الفيروسات كائنات دقيقة لا تُرى بالعين المجردة، وتسبب العديد من الأمراض. تكمن خطورتها في قدرتها على التكاثر السريع داخل خلايا الكائن الحي، بينما تعد اللقاحات هي الوسيلة الأكثر فاعلية لتحفيز جهاز المناعة ضدها.</div> تعمل اللقاحات في جسم الإنسان على:", opts: ["قتل الفيروس مباشرة", "تحفيز جهاز المناعة", "تغذية الخلايا المصابة", "إيقاف الدورة الدموية"], ans: "تحفيز جهاز المناعة" },
+
+    // --- 4. الخطأ السياقي (6 أسئلة) ---
+    { t: "الخطأ السياقي", q: "من زاد حياؤه ذهب سروره، ومن قلّ ورعه مات قلبه.", opts: ["زاد", "سروره", "ورعه", "قلبه"], ans: "زاد" },
+    { t: "الخطأ السياقي", q: "الإنجازات الكبيرة لا تتحقق بالكسل، بل بجهد ضئيل وعزيمة قوية.", opts: ["الكبيرة", "بالكسل", "ضئيل", "قوية"], ans: "ضئيل" },
+    { t: "الخطأ السياقي", q: "يجب على الإنسان أن يكون صريحاً في أقواله، لدرجة تمنعه من مجاملة الأعداء.", opts: ["صريحاً", "أقواله", "تمنعه", "الأعداء"], ans: "الأعداء" },
+    { t: "الخطأ السياقي", q: "الصحابة هم قدوتنا، فقد كانوا يحرصون على الدنيا رغبة في الأجر الأخروي.", opts: ["قدوتنا", "يحرصون", "الدنيا", "الأجر"], ans: "الدنيا" },
+    { t: "الخطأ السياقي", q: "الماء النقي لا لون له ولا طعم ولا رائحة، وهو أسوأ شراب للإنسان.", opts: ["النقي", "رائحة", "أسوأ", "للإنسان"], ans: "أسوأ" },
+    { t: "الخطأ السياقي", q: "إذا أردت النجاح في التجارة، فاحرص على رفع التكاليف وتقليل الأرباح.", opts: ["النجاح", "رفع", "التكاليف", "تقليل"], ans: "رفع" },
+
+    // --- 5. المفردة الشاذة (6 أسئلة) ---
+    { t: "المفردة الشاذة", q: "حدد المفردة الشاذة:", opts: ["الرياض", "الدمام", "جدة", "القاهرة"], ans: "القاهرة" },
+    { t: "المفردة الشاذة", q: "حدد المفردة الشاذة:", opts: ["خالد بن الوليد", "أبو بكر الصديق", "صلاح الدين الأيوبي", "عمرو بن العاص"], ans: "صلاح الدين الأيوبي" },
+    { t: "المفردة الشاذة", q: "حدد المفردة الشاذة:", opts: ["المريخ", "الأرض", "القمر", "زحل"], ans: "القمر" },
+    { t: "المفردة الشاذة", q: "حدد المفردة الشاذة:", opts: ["التفسير", "الفقه", "الحديث", "الفيزياء"], ans: "الفيزياء" },
+    { t: "المفردة الشاذة", q: "حدد المفردة الشاذة:", opts: ["الخليل بن أحمد", "سيبويه", "الجاحظ", "نيوتن"], ans: "نيوتن" },
+    { t: "المفردة الشاذة", q: "حدد المفردة الشاذة:", opts: ["الذهب", "الفضة", "النحاس", "الخشب"], ans: "الخشب" },
+
+    // --- 6. الارتباط والاختلاف (6 أسئلة) ---
+    { t: "الارتباط والاختلاف", q: "ما الكلمة الأكثر ارتباطاً بكلمة (تطواف):", opts: ["صلاة", "حج", "صوم", "زكاة"], ans: "حج" },
+    { t: "الارتباط والاختلاف", q: "الارتباط الأقوى لـ (مختبر) هو:", opts: ["تجارب", "كتب", "مقاعد", "لوحة"], ans: "تجارب" },
+    { t: "الارتباط والاختلاف", q: "الارتباط الأقوى لـ (رؤية 2030) هو:", opts: ["الماضي", "المستقبل", "الركود", "الاستيراد"], ans: "المستقبل" },
+    { t: "الارتباط والاختلاف", q: "ما الكلمة التي تختلف في نوعها:", opts: ["تفاحة", "موزة", "نخلة", "برتقالة"], ans: "نخلة" },
+    { t: "الارتباط والاختلاف", q: "الارتباط الأقوى لـ (بدر) هو:", opts: ["غزوة", "جبل", "بحر", "مدينة"], ans: "غزوة" },
+    { t: "الارتباط والاختلاف", q: "ما الكلمة المرتبطة بـ (الذكاء الاصطناعي):", opts: ["خوارزميات", "أوراق", "زراعة", "نجارة"], ans: "خوارزميات" }
+];
+
+    const currentModelId = "نموذج - 4";
+    let sName, sEmail, currentIdx = 0, userScore = 0, timer, finalQuestions, studentAnswers = [];
 
     async function verifyAndStart() {
         const emailInput = document.getElementById('studentEmail').value.trim().toLowerCase();
         if(!emailInput.includes('@')) return alert("يرجى إدخال إيميل منصة مدرستي");
-        
         document.getElementById('status-msg').innerText = "جاري التحقق... ⏳";
-
         try {
             const allowedDoc = await db.collection("allowed_students").doc(emailInput).get();
-            if (!allowedDoc.exists) {
-                showLock("هذا الإيميل غير مسجل. يرجى مراجعة المعلم.");
-                return;
-            }
-
-            sName = allowedDoc.data().name;
-            sEmail = emailInput;
-
-            const resultCheck = await db.collection("student_results")
-                .where("email", "==", sEmail)
-                .where("model_id", "==", currentModelId).get();
-
-            if (!resultCheck.empty) {
-                // العبارة الجديدة مع الرابط
-                const nextLink = "http://aztlaztl1512-bit.github.io/MAHME-/"; 
-                showLock(`عذراً، لقد سبق لك خوض هذا الاختبار. جرب تحدياً آخر واستمر في التألق!`, nextLink);
-                return;
-            }
-
+            if (!allowedDoc.exists) { showLock("هذا الإيميل غير مسجل. يرجى مراجعة المعلم."); return; }
+            sName = allowedDoc.data().name; sEmail = emailInput;
+            const resultCheck = await db.collection("student_results").where("email", "==", sEmail).where("model_id", "==", currentModelId).get();
+            if (!resultCheck.empty) { showLock(`عذراً يا ${sName}، لقد سبق لك خوض هذا الاختبار. استمر في التألق!`); return; }
             document.getElementById('challenger-display').innerText = `المتحدي: ${sName}`;
-            
             finalQuestions = [...rawQuizData].sort(() => Math.random() - 0.5);
             document.getElementById('start-page').classList.add('hidden');
             document.getElementById('quiz-page').classList.remove('hidden');
@@ -204,35 +201,26 @@
         } catch (e) { alert("خطأ في الاتصال بالسيرفر."); }
     }
 
-    function showLock(msg, link = "") {
+    function showLock(msg) {
         document.getElementById('start-page').classList.add('hidden');
         document.getElementById('lock-screen').classList.remove('hidden');
-        
-        let content = `<p>${msg}</p>`;
-        if (link) {
-            content += `<div style="margin-top:20px;">
-                            <p style="font-size:1rem; color:#888;">يمكنك تجربة هذا الرابط:</p>
-                            <a href="${link}" class="btn" style="background:#27ae60; padding:10px 30px;">اضغط هنا للانتقال ⮕</a>
-                        </div>`;
-        }
-        document.getElementById('lock-message').innerHTML = content;
+        document.getElementById('lock-message').innerText = msg;
     }
 
     function loadQuestion() {
         if(currentIdx >= finalQuestions.length) return finish();
         const data = finalQuestions[currentIdx];
-        
         document.getElementById('q-counter').innerText = `سؤال ${currentIdx+1} من ${finalQuestions.length}`;
         document.getElementById('q-type-label').innerText = data.t;
         document.getElementById('question-text').innerHTML = data.q;
         document.getElementById('next-btn').classList.add('hidden');
-        
         const box = document.getElementById('options-area'); box.innerHTML = '';
         [...data.opts].sort(() => Math.random() - 0.5).forEach(o => {
             const d = document.createElement('div'); d.className = 'opt'; d.innerText = o;
             d.onclick = () => {
                 clearInterval(timer);
-                if(o === data.ans) userScore++;
+                const isCorrect = (o === data.ans); if(isCorrect) userScore++;
+                studentAnswers.push({ qText: data.q, studentAns: o, correctAns: data.ans, isCorrect: isCorrect, type: data.t });
                 document.querySelectorAll('.opt').forEach(el => {
                     el.onclick = null;
                     if(el.innerText === data.ans) el.classList.add('correct');
@@ -259,13 +247,46 @@
     async function finish() {
         document.getElementById('quiz-page').classList.add('hidden');
         document.getElementById('result-page').classList.remove('hidden');
-        document.getElementById('final-greeting').innerHTML = `جهدك اليوم محل تقدير، وبإصرار وعزيمة ستصل لمستوى أعلى في المرة المقبلة <br> يا (${sName}) 💐💐`;
-        document.getElementById('score-text').innerText = `${userScore} / ${finalQuestions.length}`;
         
-        await db.collection("student_results").add({ 
-            name: sName, email: sEmail, score: userScore, total: finalQuestions.length, 
-            model_id: currentModelId, time: firebase.firestore.FieldValue.serverTimestamp() 
+                const sections = { tan: 0, ekm: 0, syq: 0, st: 0, mfr: 0, art: 0, ikh: 0 };
+        const map = { 
+            "التناظر اللفظي": "tan", 
+            "إكمال الجمل": "ekm", 
+            "الخطأ السياقي": "syq", 
+            "استيعاب المقروء": "st", 
+            "المفردة الشاذة": "mfr", 
+            "الارتباط والاختلاف": "art" 
+        };
+
+        Object.keys(map).forEach(key => {
+            const qInType = studentAnswers.filter(a => a.type === key);
+            if(qInType.length > 0) {
+                const correct = qInType.filter(a => a.isCorrect).length;
+                const percent = Math.round((correct / qInType.length) * 100);
+                
+                if (map[key] === "art") {
+                    sections.art = percent; 
+                    sections.ikh = percent; 
+                } else {
+                    sections[map[key]] = percent;
+                }
+            }
         });
+
+        await db.collection("student_results").add({ 
+            name: sName, 
+            email: sEmail, 
+            score: userScore, 
+            total: finalQuestions.length, 
+            model_id: currentModelId, 
+            sections: sections, 
+            answers: studentAnswers,
+            time: firebase.firestore.FieldValue.serverTimestamp() 
+        });
+
+        document.getElementById('final-greeting').innerHTML = `جهدك اليوم محل تقدير يا (${sName}) 💐<br>بإصرار وعزيمة ستصل لمستوى أعلى!`;
+        document.getElementById('score-text').innerText = `${userScore} / ${finalQuestions.length}`;
+
     }
 </script>
 </body>
